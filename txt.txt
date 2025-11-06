@@ -1,0 +1,61 @@
+!pip install pillow
+from PIL import Image
+import os
+
+def loader():
+  pass
+dataset = datasets.ImageFolder(
+    root=images,
+    loader=loader
+)
+resize_transform = transforms.Resize((1024, 1024), interpolation=PIL.Image.Resampling(1), antialias=True) # LANCZOS
+
+'''Loops through the files in an input folder (input_folder), resizes them to a
+specified new size (new_size), an adds them to an output folder (output_folder).'''
+def resize_images_in_folder(input_folder, output_folder, new_size):
+    # Loop through all files in the input folder
+    for image, _ in dataset.samples:
+      with Image.open(image) as im:
+        image_resized = resize_transform(im)
+        os.remove(image)
+        image_resized.save(image)
+
+
+  print(f"Resized {filename} and saved to {output_path}")
+
+
+
+
+
+
+dataset = datasets.ImageFolder(
+    root=r"/content/drive/MyDrive/HAWKwood/Multi Image Benchmark",
+    loader=loader
+)
+
+destination = r"/content/drive/MyDrive/HAWKwood/images"
+os.makedirs(destination, exist_ok=True)
+
+for sample_path, _ in dataset.samples:
+    if "synthetic" not in sample_path:
+        filename = os.path.basename(sample_path)
+        dest_file = os.path.join(destination, filename)
+
+        # If file exists, add a number suffix
+        counter = 1
+        while os.path.exists(dest_file):
+            name, ext = os.path.splitext(filename)
+            dest_file = os.path.join(destination, f"{name}_{counter}{ext}")
+            counter += 1
+
+        shutil.move(sample_path, dest_file)
+
+
+
+
+
+
+
+
+
+https://derekphilipau.github.io/machinelearningforartists/week3/#various-stylegan2-links
