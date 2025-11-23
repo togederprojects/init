@@ -10,12 +10,7 @@ python train.py --outdir=./results --gpus=1 --snap=4 --data=(directory of train 
 python style_mixing.py --outdir=./results/generate --rows=85,100,75,458,1500 --cols=55,821,1789,293 --network=(path to .pkl)
 
 -------
-Der Inception Score (IS) wird zur Bewertung der Qualität von generierten Bildern verwendet. Die Punktzahl ist beschreibt durch die Ausgabe eines vortrainierten Inception v3 auf nur generierten Samples durch GAN.
-
-
-Ein vortrainiertes Inception-V3-Modell wird auf realen und auch generierten Bildern verwendet, um Features zu extrahieren. Dann wird FID durch Mittelwert und die Kovarianz für die Features der realen und der generierten Bilder berechnet. Der Zweck des FID besteht darin, die Vielfalt der von einem generativen Modell erstellten Bilder mit Bildern in einem Dataset zu messen. Der FID vergleicht also, wie oft dieselben übergeordneten Merkmale in den beiden Bildersätzen vorkommen.
-
-
-
-Classifiers, die den besten (niedrigsten) FID erzielen, weisen in der Regel eine größere Vielfalt an Beispielen auf. Classifiers, die den besten (höchsten) IS erzielen, weisen in der Regel eine bessere Qualität innerhalb einzelner Bilder auf. 
-
+v1-5-pruned-emaonly.safetensors
+ip-adapter_sd15.safetensors
+CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors
+vae-ft-mse-840000.safetensors
