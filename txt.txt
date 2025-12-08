@@ -17,4 +17,52 @@ vae-ft-mse-840000.safetensors
 
 
 
-https://drive.google.com/drive/folders/14RwdTN4WnAARQE4i2l3YPiEuw4NRylt5?usp=sharing
+https://drive.google.com/drive/folders/1yONuJZjcZKLjM_y1X2vKKdof0xD4ctIf?usp=sharing
+
+
+from PIL import Image
+from PIL import ImageFilter
+
+
+def crop(img: Image.Image, msk:Image.Image, dst:str, x_pad:int, y_pad:int):
+    thrsh = img.convert(mode='1', dither=Image.Dither.FLOYDSTEINBERG)
+    l, u, r, b = thrsh.getbbox(alpha_only=False)
+    img_w, img_h = im.size
+
+    x_start = max(0, l - x_pad)
+    y_start = max(0, u - y_pad)
+    x_end   = min(img_w, r + x_pad)
+    y_end   = min(img_h, b + y_pad)
+
+    # cropped_msk = msk.crop((x_start, y_start, x_end, y_end))
+    cropped_img = im.crop((x_start, y_start, x_end, y_end))
+    
+
+    return cropped_img
+    
+    
+
+def filter_merge(im1: Image.Image) -> Image.Image:
+    w = im1.size[0] + im1.size[0]
+    h = im1.size[1]
+    im = Image.new("RGB", (w, h))
+
+    im_filtered = im1.filter(ImageFilter.SHARPEN)
+
+    im.paste(im1)
+    im.paste(im_filtered, (im1.size[0], 0))
+
+    return im
+
+
+def sharpen(img:str):
+    i = cv2.imread(img)
+    kernel = np.array([
+    [ 0,  -0.1,  0 ],
+    [-0.1, 1.4, -0.1],
+    [ 0,  -0.1,  0 ],])
+    filtered = cv2.filter2D(i, -1, kernel)
+    filename = img
+    return cv2.imwrite(filename, filtered)
+
+    
