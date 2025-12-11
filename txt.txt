@@ -18,7 +18,7 @@ vae-ft-mse-840000.safetensors
 
 
 https://drive.google.com/drive/folders/1yONuJZjcZKLjM_y1X2vKKdof0xD4ctIf?usp=sharing
-
+https://drive.google.com/drive/folders/1dPvX0FIMtWGd2Vznod7Teb2UVroKWrug?usp=sharing
 
 from PIL import Image
 from PIL import ImageFilter
